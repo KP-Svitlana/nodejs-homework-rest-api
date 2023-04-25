@@ -11,7 +11,10 @@ const addSchema = Joi.object({
       tlds: { allow: ["com", "net"] },
     })
     .required(),
-  phone: Joi.string().required(),
+  phone: Joi.string()
+    .regex(/^[0-9]{10}$/)
+    .messages({ "string.pattern.base": `Phone number must have 10 digits.` })
+    .required(),
 });
 
 const contacts = require("../../models/contacts.js");
@@ -56,11 +59,34 @@ router.post("/", async (req, res, next) => {
 });
 
 router.delete("/:contactId", async (req, res, next) => {
-  res.json({ message: "template message" });
+  try {
+    const id = req.params.contactId;
+    const result = await contacts.removeContact(id);
+    if (!result) {
+      throw HttpError(404, "Not found");
+    }
+    res.json({ message: "contact deleted" });
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.put("/:contactId", async (req, res, next) => {
-  res.json({ message: "template message" });
+  try {
+    const { error } = addSchema.validate(req.body);
+    if (error) {
+      throw HttpError(400, error.message);
+    }
+    const id = req.params.contactId;
+    const result = await contacts.updateContact(id, req.body);
+    console.log(result);
+    if (!result) {
+      throw HttpError(404, "Not found");
+    }
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
