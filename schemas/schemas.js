@@ -1,4 +1,5 @@
 const Joi = require("joi");
+const { HttpError } = require("../helpers");
 
 const addSchema = Joi.object({
   name: Joi.string().required(),
@@ -9,9 +10,16 @@ const addSchema = Joi.object({
     })
     .required(),
   phone: Joi.string()
-    .regex(/^[0-9]{10}$/)
+    .regex(/^\([0-9]{3}\) [0-9]{3}-[0-9]{4}/)
     .messages({ "string.pattern.base": `Phone number must have 10 digits.` })
     .required(),
+  favorite: Joi.boolean(),
 });
 
-module.exports = addSchema;
+const updateFavoriteSchema = Joi.object({
+  favorite: Joi.boolean()
+    .required()
+    .error(HttpError(400, "missing field favorite")),
+});
+
+module.exports = { addSchema, updateFavoriteSchema };
