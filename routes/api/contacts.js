@@ -6,8 +6,6 @@ const { validateBody, isValidId } = require("../../middlewares");
 
 const router = express.Router();
 
-// console.log(schemas);
-
 router.get("/", ctrl.contactsCtrl.getAll);
 
 router.get("/:contactId", isValidId, ctrl.contactsCtrl.getContactById);
