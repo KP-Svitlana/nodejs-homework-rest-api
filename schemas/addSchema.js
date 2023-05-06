@@ -1,5 +1,4 @@
 const Joi = require("joi");
-const { HttpError } = require("../helpers");
 
 const addSchema = Joi.object({
   name: Joi.string().required(),
@@ -16,10 +15,4 @@ const addSchema = Joi.object({
   favorite: Joi.boolean(),
 });
 
-const updateFavoriteSchema = Joi.object({
-  favorite: Joi.boolean()
-    .required()
-    .error(HttpError(400, "missing field favorite")),
-});
-
-module.exports = { addSchema, updateFavoriteSchema };
+module.exports = { addSchema };

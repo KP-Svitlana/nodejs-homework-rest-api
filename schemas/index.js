@@ -1,3 +1,6 @@
-const addSchema = require("./schemas");
+const { addSchema } = require("./addSchema");
+const { updateFavoriteSchema } = require("./updateFavoriteSchema");
 
-module.exports = addSchema;
+const joiSchemas = { addSchema, updateFavoriteSchema };
+
+module.exports = { joiSchemas };

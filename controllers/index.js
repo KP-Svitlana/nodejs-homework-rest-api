@@ -2,16 +2,20 @@ const {
   getAll,
   getContactById,
   addContact,
-  deleteContact,
   updateContact,
   updateStatusContact,
-} = require("../controllers/contacts");
+  deleteContact,
+} = require("./contacts");
 
-module.exports = {
+const contactsCtrl = {
   getAll,
   getContactById,
   addContact,
-  deleteContact,
   updateContact,
   updateStatusContact,
+  deleteContact,
+};
+
+module.exports = {
+  contactsCtrl,
 };
