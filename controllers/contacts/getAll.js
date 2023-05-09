@@ -14,7 +14,7 @@ const getAll = async (req, res) => {
     if (!result) {
       throw HttpError(404, "Not found");
     }
-    res.json(result);
+    return res.json(result);
   }
   const result = await Contact.find(
     { owner, favorite },
