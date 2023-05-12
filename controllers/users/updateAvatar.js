@@ -14,7 +14,6 @@ const updateAvatar = async (req, res) => {
   await fs.rename(tempUpload, resultUpload);
   const avatarURL = path.join("avatars", fileName);
   const jimpPath = path.join(avatarsDir, fileName);
-  console.log(jimpPath);
   Jimp.read(jimpPath, (err, avatar) => {
     if (err) throw err;
     avatar
