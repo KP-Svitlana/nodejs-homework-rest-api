@@ -7,7 +7,13 @@ const {
   deleteContact,
 } = require("./contacts");
 
-const { register, logIn, logOut } = require("./auth");
+const {
+  register,
+  logIn,
+  logOut,
+  verifyEmail,
+  resendVerifyEmail,
+} = require("./auth");
 const { getCurrent, userSubscriptionUpdate, updateAvatar } = require("./users");
 
 const contactsCtrl = {
@@ -19,7 +25,7 @@ const contactsCtrl = {
   deleteContact,
 };
 
-const authCtrl = { register, logIn, logOut };
+const authCtrl = { register, logIn, logOut, verifyEmail, resendVerifyEmail };
 const usersCtrl = { getCurrent, userSubscriptionUpdate, updateAvatar };
 
 module.exports = {
