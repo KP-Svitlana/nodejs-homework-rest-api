@@ -11,6 +11,14 @@ router.post(
   ctrl.authCtrl.register
 );
 
+router.get("/verify/:verificationToken", ctrl.authCtrl.verifyEmail);
+
+router.post(
+  "/verify",
+  validateBody(joiSchemas.verifyEmailSchema),
+  ctrl.authCtrl.resendVerifyEmail
+);
+
 router.post("/login", validateBody(joiSchemas.authSchema), ctrl.authCtrl.logIn);
 
 router.get("/current", authenticate, ctrl.usersCtrl.getCurrent);
